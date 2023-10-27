@@ -1,4 +1,4 @@
-<app-header title="Registro">
+<app-header backButton="/auth" title="Volver">
 
 </app-header>
 
@@ -11,6 +11,8 @@
   <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
 
     <app-logo></app-logo>
+
+    <ion-text class="register-title" color="primary">Registro</ion-text>
 
     <app-custom-input 
     icon="person-outline"
