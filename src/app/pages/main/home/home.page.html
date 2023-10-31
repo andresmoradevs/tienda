@@ -2,45 +2,32 @@
 
 <ion-content>
 
-  <ion-list>
-    <ion-item-sliding class="product-item" *ngFor="let product of products">
-      
-      <ion-item>
-        <ion-avatar>
-          <img [src]="product.image">
-        </ion-avatar>
-        <ion-label>
-          <div class="name"> {{ product.name }} </div>
-          <div class="data">
-            <strong>Precio: </strong>{{ product.price | currency: 'COP ' }} <br>
-            <strong>Unidades Disponibles:</strong>{{ product.soldUnits }} 
-          </div>
-        </ion-label>
-      </ion-item>
+  <ion-grid>
+    <ion-row>
+        <ion-col *ngFor="let p of products">
 
+          <ion-card (click)="detailOfProduct(p)">
 
-      
-      <ion-item-options>
-        
-        <ion-item-option (click)="addUpdateProduct(product)" side="start">
-          <ion-icon class="option-btn" name="create-outline"></ion-icon>
-        </ion-item-option>
-  
-        <ion-item-option color="danger" side="start">
-          <ion-icon class="option-btn" name="trash-outline"></ion-icon>
-        </ion-item-option>
+            <ion-card-header>
+              <img [src]="p.images.image1">
+            </ion-card-header>
 
-      </ion-item-options>
-      
-     
+            <ion-card-content>
 
-    </ion-item-sliding>
-  </ion-list>
-
+              <ion-label>
+                <p> {{ p.name }} </p>
+                <h2>$ {{ p.price }}</h2>
+              </ion-label>
+            </ion-card-content>
+            
+          </ion-card>
+          
+        </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="addUpdateProduct()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>

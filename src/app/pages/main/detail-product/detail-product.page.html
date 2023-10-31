@@ -1,0 +1,33 @@
+<app-header backButton="home" title="Informacion del producto"></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          <ion-card-title> {{ product.name }} </ion-card-title>
+        </ion-col>
+        <ion-col>
+          <ion-text > $ {{ product.price }} </ion-text>
+        </ion-col>
+      </ion-row>
+      
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          <img [src]="product.images.image1">
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-text>
+          {{ product.description }}
+        </ion-text>
+      </ion-item>
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

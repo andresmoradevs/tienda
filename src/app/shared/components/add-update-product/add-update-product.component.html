@@ -2,21 +2,21 @@
 <ion-content>
     <form [formGroup]="form" class="ion-padding ion-text-center" (ngSubmit)="createProduct()" (keypress.enter)="submit()">
 
-        <ion-avatar *ngIf="form.value.image">
-            <img [src]="form.value.image">
+        <ion-avatar *ngIf="form.value.image1">
+            <img [src]="form.value.image1">
         </ion-avatar>
 
         <!-- Camera -->
 
         <ion-icon 
             class="image-icon" 
-            *ngIf="!form.value.image" 
+            *ngIf="!form.value.image1" 
             name="image-outline">
         </ion-icon>
         
         <br>   
 
-        <ion-button (click)="takeImage()" mode="ios" size="small" shape="round">
+        <ion-button (click)="takeImage1()" mode="ios" size="small" shape="round">
             Abrir Camara/Subir Foto
         </ion-button>
 

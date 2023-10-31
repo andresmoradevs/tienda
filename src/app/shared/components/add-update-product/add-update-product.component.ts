@@ -16,7 +16,7 @@ export class AddUpdateProductComponent  implements OnInit {
 
   form = new FormGroup({
     id: new FormControl(''),
-    image: new FormControl('', [Validators.required]),
+    image1: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     price: new FormControl(null, [Validators.required, Validators.min(0)]),
     soldUnits: new FormControl(null, [Validators.required, Validators.min(0)]),
@@ -29,12 +29,12 @@ export class AddUpdateProductComponent  implements OnInit {
 
   ngOnInit() {
     this.user = this.utilsService.getFromLocalStorage('user');
-    if(this.product) this.form.setValue(this.product);
+    // if(this.product) this.form.setValue(this.product);
   }
 
-  async takeImage() {
+  async takeImage1() {
     const dataUrl = (await this.utilsService.takePicture('Imagen del Produto')).dataUrl;
-    this.form.controls.image.setValue(dataUrl);
+    this.form.controls.image1.setValue(dataUrl);
   }  
 
   submit() {
@@ -46,15 +46,15 @@ export class AddUpdateProductComponent  implements OnInit {
   
   async createProduct() {
     
-      let path = `users/${this.user.uid}/products`;
+      let path = `/productos`;
 
       const loading = await this.utilsService.loading();
       await loading.present();
 
-      let dataUrl = this.form.value.image;
-      let imagePath = `${this.user.uid}/${Date.now()}`;
-      let imageUrl = await this.firebaseService.uploadImage(imagePath, dataUrl);
-      this.form.controls.image.setValue(imageUrl);
+      let dataUrl1 = this.form.value.image1;
+      let imagePath1 = `${this.user.uid}/${Date.now()}`;
+      let imageUrl1 = await this.firebaseService.uploadImage(imagePath1, dataUrl1);
+      this.form.controls.image1.setValue(imageUrl1);
 
       delete this.form.value.id
 
@@ -94,11 +94,11 @@ export class AddUpdateProductComponent  implements OnInit {
       const loading = await this.utilsService.loading();
       await loading.present();
 
-      if(this.form.value.image != this.product.image) {
-        let dataUrl = this.form.value.image;
-        let imagePath = await this.firebaseService.getFilePath(this.product.image);
+      if(this.form.value.image1 != this.product.images.image1) {
+        let dataUrl = this.form.value.image1;
+        let imagePath = await this.firebaseService.getFilePath(this.product.images.image1);
         let imageUrl = await this.firebaseService.uploadImage(imagePath, dataUrl);
-        this.form.controls.image.setValue(imageUrl);
+        this.form.controls.image1.setValue(imageUrl);
         
       }
 

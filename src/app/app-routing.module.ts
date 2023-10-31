@@ -10,6 +10,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'detail-product',
+    loadChildren: () => import('./pages/main/detail-product/detail-product.module').then( m => m.DetailProductPageModule)
+  },
+  {
     path: 'forgot-password',
     loadChildren: () => import('./pages/auth/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },

@@ -1,8 +1,10 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Product } from 'src/app/models/product.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { UtilsService } from 'src/app/services/utils.service';
+import { UtilsService } from 'src/app/services/utils.service'
 import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-product/add-update-product.component';
 
 @Component({
@@ -14,11 +16,10 @@ export class HomePage implements OnInit {
 
   firebaseService = inject(FirebaseService);
   utilsService = inject(UtilsService);
+  nav = inject(NavController);
+  router = inject(Router);
 
   products: Product[] = [];
-
-  ngOnInit() {
-  }
 
   // signOut() {
   //   this.firebaseService.signOut();
@@ -26,19 +27,21 @@ export class HomePage implements OnInit {
   user(): User  {
     return this.utilsService.getFromLocalStorage('user');
   }
-
-  ionViewWillEnter() {
-    this.getProducts();
+  detailOfProduct(p: Product) {
+    this.utilsService.saveInLocalStorage('product-select', p);
+    this.router.navigateByUrl('detail-product');
+    // console.log(p);
+    
   }
 
   getProducts() {
-    let path = `users/${this.user().uid}/products`;
+    
 
-    let sub = this.firebaseService.getCollectionData(path).subscribe({
+    this.firebaseService.getProductsFromRealtime().subscribe({
       next: (res: any) =>  {
-        console.log(res);
+        // console.log(res);
         this.products = res;
-        sub.unsubscribe();
+        // sub.unsubscribe();
       } 
     })
 
@@ -51,4 +54,14 @@ export class HomePage implements OnInit {
       componentProps: { product }
     })
   }
+
+  getProductsFromRealtime() {
+
+  }
+  ngOnInit(): void {  
+    this.getProducts();
+    
+  }
+
+  
 }

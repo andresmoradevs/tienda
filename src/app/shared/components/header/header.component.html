@@ -8,6 +8,7 @@
       <ion-button *ngIf="isModal" (click)="dismissModal()">
         <ion-icon name="close-circle-outline"></ion-icon>
       </ion-button>
+      
 
     </ion-buttons>
 
@@ -15,5 +16,8 @@
       <strong>{{ title }}</strong>
       <!-- <div class="admin">A D M I N</div> -->
     </ion-title>
+    <ion-button slot="end" (click)="signOut()">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
