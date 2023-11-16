@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-avatar slot="end">
+      <img src="../../assets/logo.png" >
+    </ion-avatar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+
+    <ion-row >
+      <ion-col *ngFor="let product of products | async">
+
+        <ion-card>
+
+          <ion-card-header>
+            <ion-text>
+            $ {{ product.price }}
+            </ion-text>
+            <img routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)" [src]="product.images.image1">
+          </ion-card-header>
+
+          <ion-card-content>
+
+            <ion-card-title color="medium">
+              {{ product.name }}
+            </ion-card-title>
+  
+            <br>
+
+            <!-- Ver más información -->
+            <ion-text>
+              <details>
+                <summary>Ver más información</summary>
+                <div>
+                  Click sobre la imagen para ver los detalles de este producto
+                </div>
+              </details>  
+            </ion-text>
+             <!-- Fin Ver más información -->
+          </ion-card-content>
+          
+       
+        
+      </ion-card>
+      
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+  
+  
+</ion-content>

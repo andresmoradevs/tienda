@@ -29,7 +29,7 @@ export class AddUpdateProductComponent  implements OnInit {
 
   ngOnInit() {
     this.user = this.utilsService.getFromLocalStorage('user');
-    if(this.product) this.form.setValue(this.product);
+    // if(this.product) this.form.setValue(this.product);
   }
 
   async takeImage() {
@@ -94,13 +94,13 @@ export class AddUpdateProductComponent  implements OnInit {
       const loading = await this.utilsService.loading();
       await loading.present();
 
-      if(this.form.value.image != this.product.image) {
-        let dataUrl = this.form.value.image;
-        let imagePath = await this.firebaseService.getFilePath(this.product.image);
-        let imageUrl = await this.firebaseService.uploadImage(imagePath, dataUrl);
-        this.form.controls.image.setValue(imageUrl);
+      // if(this.form.value.image != this.product.image) {
+      //   let dataUrl = this.form.value.image;
+      //   let imagePath = await this.firebaseService.getFilePath(this.product.image);
+      //   let imageUrl = await this.firebaseService.uploadImage(imagePath, dataUrl);
+      //   this.form.controls.image.setValue(imageUrl);
         
-      }
+      // }
 
       
 

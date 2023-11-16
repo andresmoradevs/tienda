@@ -1,0 +1,30 @@
+img {
+    max-width: 140px;    
+}
+.img-logo {
+    img {
+        vertical-align: text-bottom;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 75px 75px 6px 4px;
+    }
+    
+}
+ion-avatar {    
+    padding: 10px;
+}
+ion-card {
+    max-width: 540px;    
+    img {
+        align-self: end;
+    }
+}
+ion-content {
+    --background: linear-gradient(195deg, #f9f1e8 0%, #f2f9f5 100%);
+    // background-image: linear-gradient(195deg, #f9f1e8 0%, #f2f9f5 100%);
+
+}
+ion-card {
+    padding: 10px;
+    background-image: linear-gradient(to bottom, white 100%, #dfe9f3 0%);
+}

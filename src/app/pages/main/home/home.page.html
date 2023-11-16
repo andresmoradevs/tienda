@@ -7,13 +7,13 @@
       
       <ion-item>
         <ion-avatar>
-          <img [src]="product.image">
+          <img [src]="product.images.image1">
         </ion-avatar>
         <ion-label>
           <div class="name"> {{ product.name }} </div>
           <div class="data">
             <strong>Precio: </strong>{{ product.price | currency: 'COP ' }} <br>
-            <strong>Unidades Disponibles:</strong>{{ product.soldUnits }} 
+            <!-- <strong>Unidades Disponibles:</strong>{{ product.soldUnits }}  -->
           </div>
         </ion-label>
       </ion-item>

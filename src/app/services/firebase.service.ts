@@ -7,6 +7,7 @@ import { User } from '../models/user.model';
 import { UtilsService } from './utils.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { getStorage, uploadString, ref, getDownloadURL } from 'firebase/storage';
+import { AngularFireDatabase, PathReference, AngularFireObject } from '@angular/fire/compat/database';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,13 @@ export class FirebaseService {
 
   auth = inject(AngularFireAuth);
   firestore = inject(AngularFirestore);
+  database = inject(AngularFireDatabase)
   utilsService = inject(UtilsService);
   storage = inject(AngularFireStorage);
+
+  getDB() {
+    return this.database.list<any>('products');
+  }
 
   getAuth() {
     return getAuth();

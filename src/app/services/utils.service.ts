@@ -40,13 +40,16 @@ export class UtilsService {
   routerLink(url: string) {
     return this.router.navigateByUrl(url);
   }
+  deleteFromLocalStorage(key: string) {
+    return localStorage.removeItem(key);
+  }
 
   saveInLocalStorage(key: string, value: any) {
-    return localStorage.setItem(key, JSON.stringify(value))
+    return localStorage.setItem(key, JSON.stringify(value));
   }
 
   getFromLocalStorage(key: string) {
-    return JSON.parse(localStorage.getItem(key))
+    return JSON.parse(localStorage.getItem(key));
   }
 
   async presentModal(opts: ModalOptions) {
