@@ -16,7 +16,7 @@ export class LandingPage implements OnInit {
   db = inject(AngularFireDatabase);
   firebaseService = inject(FirebaseService);
   utilsService = inject(UtilsService);
-
+  textSearch = '';
   router = inject(Router);
 
   products: Observable<any[]>;
@@ -44,6 +44,10 @@ export class LandingPage implements OnInit {
     // this.utilsService.saveInLocalStorage('productImage4', product.image.image4);
     // this.utilsService.saveInLocalStorage('productImage5', product.image.image5);
     
+  }
+
+  async search(event) {
+    this.textSearch = event.detail.value;
   }
 
 }

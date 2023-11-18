@@ -4,13 +4,14 @@
       <img src="../../assets/logo.png" >
     </ion-avatar>
   </ion-toolbar>
+  <ion-searchbar placeholder="Buscar" color="tertiary" animated (ionChange)="search($event)" ></ion-searchbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
-
+    
     <ion-row >
-      <ion-col *ngFor="let product of products | async">
+      <ion-col *ngFor="let product of products | async | filter : textSearch">
 
         <ion-card>
 
