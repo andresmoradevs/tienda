@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Camera,CameraResultType } from '@capacitor/camera';
 import { Product } from 'src/app/models/product.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -13,29 +14,47 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class AddUpdateProductComponent  implements OnInit {
 
   @Input() product: Product;
-
+  
   form = new FormGroup({
-    id: new FormControl(''),
-    image: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    price: new FormControl(null, [Validators.required, Validators.min(0)]),
-    soldUnits: new FormControl(null, [Validators.required, Validators.min(0)]),
-  })
+      id: new FormControl(''),
+      images: new FormControl([], [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      price: new FormControl(null, [Validators.required, Validators.min(0)]),
+      description: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+    })
   
   firebaseService = inject(FirebaseService);
   utilsService =  inject(UtilsService);
-
+  productsImages: any;
+  
   user = {} as User;
 
   ngOnInit() {
     this.user = this.utilsService.getFromLocalStorage('user');
-    // if(this.product) this.form.setValue(this.product);
   }
 
-  async takeImage() {
-    const dataUrl = (await this.utilsService.takePicture('Imagen del Produto')).dataUrl;
-    this.form.controls.image.setValue(dataUrl);
-  }  
+  // async takeImage() {
+  //   const dataUrl = (await this.utilsService.takePicture('Imagen del Produto')).dataUrl;
+  //   this.form.controls.image.setValue(dataUrl);
+  // }  
+  async selectFiles() {
+    // const dataUrlsImages = (await this.utilsService.selectFilesImages()).photos;
+    // this.form.controls.images.setValue(dataUrlsImages);
+    // console.log(dataUrlsImages);
+    const image = await Camera.pickImages({
+      quality: 90,
+      width: 100,
+      height: 100,
+      correctOrientation: true ,
+      presentationStyle: 'popover',
+      limit: 5
+    });
+    var imagesUrl = image.photos;
+    
+    this.form.controls.images.setValue(imagesUrl);
+    console.log();
+    
+  }
 
   submit() {
     if(this.form.value) {
@@ -44,93 +63,64 @@ export class AddUpdateProductComponent  implements OnInit {
     } 
   }
   
-  async createProduct() {
-    
-      let path = `users/${this.user.uid}/products`;
+  createProduct() {
+  
+    const productToSave: Product = {
+      id: '',
+      name: this.form.value.name,
+      price: this.form.value.price,
+      description: this.form.value.description,
+      images: this.form.value.images,
+    }
 
-      const loading = await this.utilsService.loading();
-      await loading.present();
+    console.log(productToSave);
 
-      let dataUrl = this.form.value.image;
-      let imagePath = `${this.user.uid}/${Date.now()}`;
-      let imageUrl = await this.firebaseService.uploadImage(imagePath, dataUrl);
-      this.form.controls.image.setValue(imageUrl);
-
-      delete this.form.value.id
-
-      this.firebaseService.addDocument(path, this.form.value).then(async res => {
-       
-        this.utilsService.dismissModal({ success: true });
-
-        this.utilsService.presentToast({
-          message: `Producto creado!`,
-          duration: 2500,
-          color: 'success',
-          position: 'middle',
-          icon: 'checkmark-circle-outline'
-        })
-        
-      }).catch(error => {
-
-        this.utilsService.presentToast({
-          message: error.message,
-          duration: 3500,
-          color: 'primary',
-          position: 'middle',
-          icon: 'alert-circle-outline'
-        })
-        
-      }).finally(() => {
-        loading.dismiss();
-      }) 
-    
-    
   }
 
   async updateProduct() {
     
-      let path = `users/${this.user.uid}/products/${this.product.id}`;
+      // let path = `users/${this.user.uid}/products/${this.product.id}`;
 
-      const loading = await this.utilsService.loading();
-      await loading.present();
+      // const loading = await this.utilsService.loading();
+      // await loading.present();
 
-      // if(this.form.value.image != this.product.image) {
-      //   let dataUrl = this.form.value.image;
-      //   let imagePath = await this.firebaseService.getFilePath(this.product.image);
-      //   let imageUrl = await this.firebaseService.uploadImage(imagePath, dataUrl);
-      //   this.form.controls.image.setValue(imageUrl);
+      // // if(this.form.value.image != this.product.image) {
+      // //   let dataUrl = this.form.value.image;
+      // //   let imagePath = await this.firebaseService.getFilePath(this.product.image);
+      // //   let imageUrl = await this.firebaseService.uploadImage(imagePath, dataUrl);
+      // //   this.form.controls.image.setValue(imageUrl);
         
-      // }
+      // // }
 
       
 
-      delete this.form.value.id
+      // delete this.form.value.id
 
-      this.firebaseService.addDocument(path, this.form.value).then(async res => {
+      // this.firebaseService.addDocument(path, this.form.value).then(async res => {
        
-        this.utilsService.dismissModal({ success: true });
+      //   this.utilsService.dismissModal({ success: true });
 
-        this.utilsService.presentToast({
-          message: `Producto actualizado!`,
-          duration: 2500,
-          color: 'success',
-          position: 'middle',
-          icon: 'checkmark-circle-outline'
-        })
+      //   this.utilsService.presentToast({
+      //     message: `Producto actualizado!`,
+      //     duration: 2500,
+      //     color: 'success',
+      //     position: 'middle',
+      //     icon: 'checkmark-circle-outline'
+      //   })
         
-      }).catch(error => {
+      // }).catch(error => {
 
-        this.utilsService.presentToast({
-          message: error.message,
-          duration: 3500,
-          color: 'primary',
-          position: 'middle',
-          icon: 'alert-circle-outline'
-        })
+      //   this.utilsService.presentToast({
+      //     message: error.message,
+      //     duration: 3500,
+      //     color: 'primary',
+      //     position: 'middle',
+      //     icon: 'alert-circle-outline'
+      //   })
         
-      }).finally(() => {
-        loading.dismiss();
-      }) 
+      // }).finally(() => {
+      //   loading.dismiss();
+      // }) 
     
   }
 

@@ -28,6 +28,17 @@ export class UtilsService {
 
   };
 
+  async selectFilesImages() {
+    return await Camera.pickImages({
+      quality: 90,
+      width: 100,
+      height: 100,
+      correctOrientation: true ,
+      presentationStyle: 'popover',
+      limit: 5
+    });
+  }
+
   loading() {
     return this.loadingCtrl.create({ spinner: 'crescent' })
   }
