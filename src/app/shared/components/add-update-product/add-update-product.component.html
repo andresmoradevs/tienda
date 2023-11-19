@@ -4,9 +4,17 @@
 
         <ion-avatar>
 
+<!-- <ion-row>
+    <img src="{{ imageSrc1 }}" alt="">
+    <img src="{{ imageSrc2 }}" alt="">
+    <img src="{{ imageSrc3 }}" alt="">
+</ion-row> -->
+           
             <swiper-container>
-                <swiper-slide *ngFor="let img of form.controls.images.value">
-                    <img [src]="img">
+                <swiper-slide *ngFor="let image of productsImages">
+                    <div>
+                        <img [src]="image">
+                    </div>
                 </swiper-slide>
             </swiper-container>
             
@@ -22,7 +30,7 @@
         
         <br>   
 
-        <ion-button (click)="selectFiles()" mode="ios" size="small" shape="round">
+        <ion-button (click)="pickImages()" mode="ios" size="small" shape="round">
             Abrir Camara/Subir Foto
         </ion-button>
 

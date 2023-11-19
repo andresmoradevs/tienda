@@ -5,6 +5,8 @@ import { Product } from 'src/app/models/product.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { FilePicker } from '@capawesome/capacitor-file-picker';
+// import { FileOpener } from '@capawesome-team/capacitor-file-opener';
 
 @Component({
   selector: 'app-add-update-product',
@@ -26,8 +28,47 @@ export class AddUpdateProductComponent  implements OnInit {
   firebaseService = inject(FirebaseService);
   utilsService =  inject(UtilsService);
   productsImages: any;
+
+  imageSrc1?: any;
+  imageSrc2?: any;
+  imageSrc3?: any;
   
+  filePath: any;
   user = {} as User;
+
+  pickFiles = async () => {
+    const result = await FilePicker.pickFiles({
+      types: ['images/png'],
+      multiple: false,
+      readData: true
+    });
+    // this.filePath = result.files[0].path;
+    // this.imageSrc1 = 'data:image/jpeg;base64,' + result.files[0].data;
+  };
+  pickImages = async () => {
+    const result = await FilePicker.pickImages({
+      multiple: true,
+      readData: true
+    });
+    // this.imageSrc1 = 'data:image/jpeg;base64,' + result.files[0];
+    for (let index = 0; index < result.files.length; index++) {
+      var elements = result.files[index].data;
+      
+      
+    }
+    
+    
+    // this.imageSrc2 = 'data:image/jpeg;base64,' + result.files[1].data;
+    // this.imageSrc2 = 'data:image/jpeg;base64,' + result.files[2].data;
+    // for (let i = 0; i < result.files.length; i++) {
+    //   // const e = result.files[i];
+    //   this.productsImages = 'data:image/jpeg;base64,' + result.files[i].data;
+    //   // this.productsImages === e.data;
+    //   // console.log(e); 
+    //   // this.productsImages = 'data:image/jpeg;base64,' + result.files[i].data;
+    // }
+    
+  }
 
   ngOnInit() {
     this.user = this.utilsService.getFromLocalStorage('user');
@@ -38,22 +79,8 @@ export class AddUpdateProductComponent  implements OnInit {
   //   this.form.controls.image.setValue(dataUrl);
   // }  
   async selectFiles() {
-    // const dataUrlsImages = (await this.utilsService.selectFilesImages()).photos;
-    // this.form.controls.images.setValue(dataUrlsImages);
-    // console.log(dataUrlsImages);
-    const image = await Camera.pickImages({
-      quality: 90,
-      width: 100,
-      height: 100,
-      correctOrientation: true ,
-      presentationStyle: 'popover',
-      limit: 5
-    });
-    var imagesUrl = image.photos;
-    
-    this.form.controls.images.setValue(imagesUrl);
-    console.log();
-    
+    var dataUrlsImages = ((await this.utilsService.selectFilesImages()).photos);
+
   }
 
   submit() {
@@ -64,15 +91,19 @@ export class AddUpdateProductComponent  implements OnInit {
   }
   
   createProduct() {
+    const product_id = this.firebaseService.database.createPushId();
   
     const productToSave: Product = {
-      id: '',
+      id: product_id,
       name: this.form.value.name,
       price: this.form.value.price,
       description: this.form.value.description,
       images: this.form.value.images,
     }
-
+    
+    // var uid = this.firebaseService.addProduct(productToSave).key;
+    // this.form.controls.id.setValue(uid);
+    // this.firebaseService.updateProduct(productToSave, uid);
     console.log(productToSave);
 
   }

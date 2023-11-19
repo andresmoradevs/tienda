@@ -28,6 +28,10 @@ export class FirebaseService {
     let idProduct = this.database.createPushId();
     return this.database.list('products').push(product).child(idProduct);
   }
+  updateProduct(product: any, id: any) {
+    
+    // return this.database.
+  }
 
   getAuth() {
     return getAuth();
