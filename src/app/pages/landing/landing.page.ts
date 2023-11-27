@@ -47,7 +47,7 @@ export class LandingPage implements OnInit {
   }
 
   async search(event) {
-    this.textSearch = event.detail.value;
+    this.textSearch = await event.detail.value;
   }
 
 }

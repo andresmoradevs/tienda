@@ -16,15 +16,15 @@
         <ion-card>
 
           <ion-card-header>
-            <ion-text>
-            $ {{ product.price }}
+            <ion-text routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)">
+              {{ product.price }}
             </ion-text>
             <img routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)" [src]="product.images.image1">
           </ion-card-header>
 
           <ion-card-content>
 
-            <ion-card-title color="medium">
+            <ion-card-title routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)" color="medium">
               {{ product.name }}
             </ion-card-title>
   

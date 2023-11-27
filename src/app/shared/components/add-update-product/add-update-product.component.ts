@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Camera,CameraResultType } from '@capacitor/camera';
+import { Camera,CameraResultType, GalleryPhotos } from '@capacitor/camera';
 import { Product } from 'src/app/models/product.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -24,6 +25,7 @@ export class AddUpdateProductComponent  implements OnInit {
     })
   
   firebaseService = inject(FirebaseService);
+  database = inject(AngularFireDatabase);
   utilsService =  inject(UtilsService);
   productsImages: any;
   
@@ -38,21 +40,32 @@ export class AddUpdateProductComponent  implements OnInit {
   //   this.form.controls.image.setValue(dataUrl);
   // }  
   async selectFiles() {
-    // const dataUrlsImages = (await this.utilsService.selectFilesImages()).photos;
-    // this.form.controls.images.setValue(dataUrlsImages);
-    // console.log(dataUrlsImages);
-    const image = await Camera.pickImages({
-      quality: 90,
-      width: 100,
-      height: 100,
-      correctOrientation: true ,
-      presentationStyle: 'popover',
-      limit: 5
-    });
-    var imagesUrl = image.photos;
+   
+    let result: GalleryPhotos = null;
+    try {
+      
+      result = await Camera.pickImages({
+        quality: 90,
+        width: 100,
+        height: 100,
+        correctOrientation: true ,
+        presentationStyle: 'popover',
+        limit: 5 ,
+      });
+
+      console.log('pickImages DATA: ', result);
+      
+      const p = result.photos.map( (res) => {
+        const img = res.webPath;
+        
+
+
+        
+      })  
+    } catch(err) {
+      console.error('pickImages ERROR: ', result, err);
+    }
     
-    this.form.controls.images.setValue(imagesUrl);
-    console.log();
     
   }
 
@@ -64,15 +77,16 @@ export class AddUpdateProductComponent  implements OnInit {
   }
   
   createProduct() {
-  
+    const idKeyProduct = this.database.createPushId();
     const productToSave: Product = {
-      id: '',
+      id: idKeyProduct,
       name: this.form.value.name,
       price: this.form.value.price,
       description: this.form.value.description,
-      images: this.form.value.images,
+      images: this.form.controls.images.value
+      
     }
-
+    this.firebaseService.addProduct(productToSave).child(idKeyProduct);
     console.log(productToSave);
 
   }

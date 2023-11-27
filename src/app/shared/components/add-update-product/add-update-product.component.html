@@ -5,7 +5,7 @@
         <ion-avatar>
 
             <swiper-container>
-                <swiper-slide *ngFor="let img of form.controls.images.value">
+                <swiper-slide *ngFor="let img of productsImages">
                     <img [src]="img">
                 </swiper-slide>
             </swiper-container>
@@ -44,7 +44,7 @@
 
         <app-custom-input 
             [control]="form.controls.price" 
-            type="number"
+            type="text"
             label="Precio">
         </app-custom-input>
 
