@@ -28,21 +28,21 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.getProducts();
+    // this.getProducts();
   }
 
-  getProducts() {
-    let path = `users/${this.user().uid}/products`;
+  // getProducts() {
+  //   let path = `users/${this.user().uid}/products`;
 
-    let sub = this.firebaseService.getCollectionData(path).subscribe({
-      next: (res: any) =>  {
-        console.log(res);
-        this.products = res;
-        sub.unsubscribe();
-      } 
-    })
+  //   let sub = this.firebaseService.getCollectionData(path).subscribe({
+  //     next: (res: any) =>  {
+  //       console.log(res);
+  //       this.products = res;
+  //       sub.unsubscribe();
+  //     } 
+  //   })
 
-  }
+  // }
 
   addUpdateProduct(product?: Product) {
     this.utilsService.presentModal({

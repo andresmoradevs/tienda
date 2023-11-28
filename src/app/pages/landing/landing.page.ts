@@ -4,7 +4,6 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { AngularFireDatabase, PathReference, AngularFireObject } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-landing',
@@ -33,16 +32,11 @@ export class LandingPage implements OnInit {
     
   }
 
-  sendDetailsProduct(product: Product) {
-    this.utilsService.saveInLocalStorage('productId', product.id);
-    this.utilsService.saveInLocalStorage('productName', product.name);
-    this.utilsService.saveInLocalStorage('productDescription', product.description);
-    this.utilsService.saveInLocalStorage('productPrice', product.price);
-    this.utilsService.saveInLocalStorage('productImages', product.images);
-    // this.utilsService.saveInLocalStorage('productImage2', product.image.image2);
-    // this.utilsService.saveInLocalStorage('productImage3', product.image.image3);
-    // this.utilsService.saveInLocalStorage('productImage4', product.image.image4);
-    // this.utilsService.saveInLocalStorage('productImage5', product.image.image5);
+  sendDetailsProduct(p: any) {
+    
+    this.utilsService.saveInLocalStorage('images', p.images);
+
+    // this.router.navigate("", p.id);
     
   }
 

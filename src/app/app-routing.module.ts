@@ -19,16 +19,25 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./pages/auth/auth.module').then( m => m.AuthPageModule), canActivate: [NoAuthGuard]
+    loadChildren: () => import('./pages/auth/auth.module').then( m => m.AuthPageModule)
   },
   {
     path: 'main',
-    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule), canActivate: [AuthGuard]
+    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
   },
   {
     path: 'landing',
     loadChildren: () => import('./pages/landing/landing.module').then( m => m.LandingPageModule)
   },
+  {
+    path: 'details/',
+    loadChildren: () => import('./pages/landing/details/details.module').then( m => m.DetailsPageModule)
+  },
+  {
+    path: 'details/:id',
+    loadChildren: () => import('./pages/landing/details/details.module').then( m => m.DetailsPageModule)
+  }
+  
 ];
 
 @NgModule({

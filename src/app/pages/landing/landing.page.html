@@ -9,16 +9,16 @@
 <ion-content>
   <ion-grid>
 
-    <ion-row >
+    <ion-row>
       <ion-col *ngFor="let product of products | async">
 
         <ion-card>
 
           <ion-card-header>
             <ion-text>
-            $ {{ product.price }}
+              {{ product.price }}
             </ion-text>
-            <img routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)" [src]="product.images.image1">
+            <img click="sendDetailsProduct(product)" [src]="product.images.image1">
           </ion-card-header>
 
           <ion-card-content>

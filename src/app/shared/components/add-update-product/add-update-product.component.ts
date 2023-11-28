@@ -28,7 +28,7 @@ export class AddUpdateProductComponent  implements OnInit {
   user = {} as User;
 
   ngOnInit() {
-    this.user = this.utilsService.getFromLocalStorage('user');
+    // this.user = this.utilsService.getFromLocalStorage('user');
     // if(this.product) this.form.setValue(this.product);
   }
 

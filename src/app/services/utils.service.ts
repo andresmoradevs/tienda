@@ -51,6 +51,9 @@ export class UtilsService {
   getFromLocalStorage(key: string) {
     return JSON.parse(localStorage.getItem(key));
   }
+  getFromLStorage(key: string) {
+    return localStorage.getItem(key)
+  }
 
   async presentModal(opts: ModalOptions) {
     const modal = await this.modalController.create(opts);

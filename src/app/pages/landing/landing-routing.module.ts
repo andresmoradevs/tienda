@@ -7,11 +7,8 @@ const routes: Routes = [
   {
     path: '',
     component: LandingPage
-  },
-  {
-    path: 'details/:id',
-    loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
   }
+
 ];
 
 @NgModule({
