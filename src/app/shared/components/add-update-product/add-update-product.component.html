@@ -10,13 +10,13 @@
     <img src="{{ imageSrc3 }}" alt="">
 </ion-row> -->
            
-            <swiper-container>
+            <!-- <swiper-container>
                 <swiper-slide *ngFor="let image of productsImages">
                     <div>
                         <img [src]="image">
                     </div>
                 </swiper-slide>
-            </swiper-container>
+            </swiper-container> -->
             
         </ion-avatar>
 
@@ -30,9 +30,11 @@
         
         <br>   
 
-        <ion-button (click)="pickImages()" mode="ios" size="small" shape="round">
+        <!-- <ion-button (click)="pickImages()" mode="ios" size="small" shape="round">
             Abrir Camara/Subir Foto
-        </ion-button>
+        </ion-button> -->
+        <input type="file" (change)="onFileSelected($event)" multiple>
+
 
         <!-- Name -->
 
