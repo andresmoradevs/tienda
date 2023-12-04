@@ -25,6 +25,7 @@ export class AddUpdateProductComponent  implements OnInit {
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       price: new FormControl('', [Validators.required, Validators.min(0)]),
       description: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      techs: new FormControl(null, [Validators.required, Validators.minLength(3)]),
     })
   
   firebaseService = inject(FirebaseService);
@@ -40,10 +41,6 @@ export class AddUpdateProductComponent  implements OnInit {
     this.productsImages = filesImages;
 
     this.form.controls.images.setValue(this.productsImages);
-
-    console.log('imagenes de productos precargados');
-    
-    // this.firebaseService.uploadProductImages(productID, files);
   }
 
   ngOnInit() {
@@ -63,6 +60,7 @@ export class AddUpdateProductComponent  implements OnInit {
       price: this.form.value.price,
       description: this.form.value.description,
       images: this.form.value.images,
+      techs: this.form.value.techs
     }
     
     this.firebaseService.addProduct(productToSave.id, productToSave);

@@ -43,9 +43,6 @@ export class FirebaseService {
     }
 
   }
-  getNewId() {
-    return this.database.createPushId();
-  }
 
   getDB() {
     return this.database.list<any>('products').valueChanges();
@@ -58,10 +55,6 @@ export class FirebaseService {
       console.log(er);
     }
     this.database.list('products').update(productID,product);
-  }
-  updateProduct(product: any, id: any) {
-    
-    // return this.database.
   }
 
   getAuth() {
