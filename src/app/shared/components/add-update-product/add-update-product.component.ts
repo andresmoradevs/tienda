@@ -23,7 +23,7 @@ export class AddUpdateProductComponent  implements OnInit {
       id: new FormControl(''),
       images: new FormControl([], [Validators.required]),
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      price: new FormControl(null, [Validators.required, Validators.min(0)]),
+      price: new FormControl('', [Validators.required, Validators.min(0)]),
       description: new FormControl(null, [Validators.required, Validators.minLength(3)]),
     })
   
@@ -37,10 +37,11 @@ export class AddUpdateProductComponent  implements OnInit {
   onFileSelected(event) {
     const filesImages = event.target.files;
 
-    console.log(filesImages);
-    
     this.productsImages = filesImages;
 
+    this.form.controls.images.setValue(this.productsImages);
+
+    console.log('imagenes de productos precargados');
     
     // this.firebaseService.uploadProductImages(productID, files);
   }
@@ -50,16 +51,13 @@ export class AddUpdateProductComponent  implements OnInit {
   }
 
   submit() {
-    if(this.form.value) {
-      if(this.product) this.updateProduct();
-      else this.createProduct();
-    } 
+    this.createProduct();
   }
   
   createProduct() {
     const product_id = this.firebaseService.database.createPushId();
-  
-    const productToSave: Product = {
+    
+    const productToSave: any = {
       id: product_id,
       name: this.form.value.name,
       price: this.form.value.price,
@@ -67,18 +65,10 @@ export class AddUpdateProductComponent  implements OnInit {
       images: this.form.value.images,
     }
     
-    // var uid = this.firebaseService.addProduct(productToSave).key;
-    // this.form.controls.id.setValue(uid);
-    // this.firebaseService.updateProduct(productToSave, uid);
+    this.firebaseService.addProduct(productToSave.id, productToSave);
     console.log(productToSave);
-    // this.firebaseService.uploadProductImages(productID, files);
 
   }
 
-  async updateProduct() {
-    
-    
-    
-  }
 
 }

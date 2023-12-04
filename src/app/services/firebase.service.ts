@@ -41,14 +41,23 @@ export class FirebaseService {
       ).subscribe();
 
     }
+
+  }
+  getNewId() {
+    return this.database.createPushId();
   }
 
   getDB() {
     return this.database.list<any>('products').valueChanges();
   }
-  addProduct(product: any) {
-    let idProduct = this.database.createPushId();
-    return this.database.list('products').push(product).child(idProduct);
+  addProduct(productID: any, product: any) {
+    // let idProduct = this.database.createPushId();
+    try {
+      this.uploadProductImages(productID, product.images);
+    } catch(er) {
+      console.log(er);
+    }
+    this.database.list('products').update(productID,product);
   }
   updateProduct(product: any, id: any) {
     
