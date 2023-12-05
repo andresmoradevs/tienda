@@ -13,18 +13,18 @@
     <ion-row >
       <ion-col *ngFor="let product of products | async | filter : textSearch">
 
-        <ion-card>
+        <ion-card routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)">
 
           <ion-card-header>
-            <ion-text routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)">
+            <ion-text>
               {{ product.price }}
             </ion-text>
-            <img routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)" [src]="product.images.image1">
+            <img [src]="product.images.image1">
           </ion-card-header>
 
           <ion-card-content>
 
-            <ion-card-title routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)" color="medium">
+            <ion-card-title size="small" routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)" color="dark">
               {{ product.name }}
             </ion-card-title>
   
