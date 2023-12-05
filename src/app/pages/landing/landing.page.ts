@@ -39,15 +39,17 @@ export class LandingPage implements OnInit {
     this.utilsService.saveInLocalStorage('productDescription', product.description);
     this.utilsService.saveInLocalStorage('productPrice', product.price);
     this.utilsService.saveInLocalStorage('productImages', product.images);
-    // this.utilsService.saveInLocalStorage('productImage2', product.image.image2);
-    // this.utilsService.saveInLocalStorage('productImage3', product.image.image3);
-    // this.utilsService.saveInLocalStorage('productImage4', product.image.image4);
-    // this.utilsService.saveInLocalStorage('productImage5', product.image.image5);
     
   }
 
-  async search(event) {
-    this.textSearch = await event.detail.value;
+  search(event) {
+    try {
+      this.textSearch = event.detail.value;
+    } catch(er) {
+      console.log(er);
+
+    }
+    
   }
 
 }

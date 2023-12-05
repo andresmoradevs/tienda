@@ -20,29 +20,40 @@
 </ion-header>
 
 <ion-content>
-  <ion-card> 
+  <ion-item>
+    <ion-card> 
 
-    <ion-card-header>
-
-      <ion-card-title> {{ productName }} </ion-card-title>
-     
-    </ion-card-header>
-
-    <ion-card-content>
-
-      <swiper-container>
-
-        <swiper-slide *ngFor="let image of productImages">
-          <img [src]="image">
-        </swiper-slide>
+      <ion-card-header>
+  
+        <ion-card-title> {{ productName }} </ion-card-title>
+       
+      </ion-card-header>
+  
+      <ion-card-content>
         
-      </swiper-container>
-
-      <ion-text>
-        <p> {{ productDescription }} </p>
-      </ion-text>
-
-    </ion-card-content>
-
-  </ion-card>
+        <swiper-container>
+  
+          <swiper-slide *ngFor="let image of productImages">
+            <img [src]="image">
+          </swiper-slide>
+          
+        </swiper-container>
+  
+        <ion-item>
+          <ion-text>
+            <p> {{ productPrice }} </p>
+          </ion-text>
+         </ion-item>
+        <ion-item>
+          <ion-text>
+            <p> {{ productDescription }} </p>
+          </ion-text>
+        </ion-item>
+       
+  
+      </ion-card-content>
+  
+    </ion-card>
+  </ion-item>
+  
 </ion-content>

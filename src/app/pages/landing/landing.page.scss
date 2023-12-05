@@ -10,7 +10,9 @@ img {
     }
     
 }
+
 ion-header {
+    background-color: #17401E;
     ion-toolbar {
         border-radius: 0 0 18px 18px;
     }
@@ -21,13 +23,14 @@ ion-avatar {
 }
 ion-card {
     max-width: 540px;   
+    max-height: 500px;  
     border-radius: 25px;
     img {
         align-self: end;
     }
 }
 ion-content {
-    --background: linear-gradient(225deg, #3c81ff 0%, #784BA0 50%, #2B86C5 100%);
+    --background: #123017;
     // background-image: linear-gradient(195deg, #f9f1e8 0%, #f2f9f5 100%);
 
 }
