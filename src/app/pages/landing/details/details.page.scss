@@ -3,6 +3,13 @@ ion-icon {
     margin: 8px;   
     color: gray; 
 }
+ion-header {
+    background-color: #17401E;
+    ion-toolbar {
+        border-radius: 0 0 18px 18px;
+    }
+    
+}
 ion-content {
     text-align: -webkit-center;
     ion-card {
