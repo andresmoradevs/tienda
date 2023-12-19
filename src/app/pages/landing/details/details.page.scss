@@ -1,0 +1,25 @@
+ion-icon {
+    padding: 8px;
+    margin: 8px;   
+    color: gray; 
+}
+ion-header {
+    background-color: #17401E;
+    ion-toolbar {
+        border-radius: 0 0 18px 18px;
+    }
+    
+}
+ion-content {
+    text-align: -webkit-center;
+    ion-card {
+        padding: 18px;
+        margin: 18px;
+        width: 75%;
+        align-items: center;
+        text-align: center;
+        img {
+            width: 250px;
+        }
+    }
+}

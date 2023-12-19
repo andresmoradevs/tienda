@@ -14,10 +14,10 @@ export class HomePage implements OnInit {
 
   firebaseService = inject(FirebaseService);
   utilsService = inject(UtilsService);
-
-  products: Product[] = [];
+  products: any[];
 
   ngOnInit() {
+    
   }
 
   // signOut() {
@@ -31,17 +31,13 @@ export class HomePage implements OnInit {
     this.getProducts();
   }
 
-  getProducts() {
-    let path = `users/${this.user().uid}/products`;
+  async getProducts() {
 
-    let sub = this.firebaseService.getCollectionData(path).subscribe({
-      next: (res: any) =>  {
-        console.log(res);
-        this.products = res;
-        sub.unsubscribe();
-      } 
-    })
-
+    await this.firebaseService.getDB().subscribe((result) => {
+      this.products = result;
+      return console.log(result);
+    });
+  
   }
 
   addUpdateProduct(product?: Product) {

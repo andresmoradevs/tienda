@@ -1,0 +1,47 @@
+img {
+    max-width: 140px;    
+}
+.img-logo {
+    img {
+        vertical-align: text-bottom;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 75px 75px 6px 4px;
+    }
+    
+}
+
+ion-header {
+    background-color: #17401E;
+    ion-toolbar {
+        border-radius: 0 0 18px 18px;
+    }
+    
+}
+ion-avatar {    
+    padding: 10px;
+}
+ion-card {
+    max-width: 540px;   
+    max-height: 500px;  
+    border-radius: 25px;
+    img {
+        align-self: end;
+    }
+}
+ion-content {
+    // --background: #123017;
+    
+    --background: linear-gradient(190deg, #c0e578 0%, #153c26 100%);
+
+}
+ion-grid {
+    text-align: -webkit-center;
+}
+ion-card {
+    
+    width: max-content;
+    padding: 10px;
+    background-image: linear-gradient(to bottom, white 100%, #dfe9f3 0%);
+}
+

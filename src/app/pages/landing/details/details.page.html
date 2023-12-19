@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    
+    <ion-buttons slot="start">
+      
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+      
+    </ion-buttons>
+    <ion-buttons slot="end">
+
+      <ion-button>
+        <ion-icon name="apps"></ion-icon>
+      </ion-button>
+
+    </ion-buttons> 
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-card> 
+
+      <ion-card-header>
+  
+        <ion-card-title> {{ productName }} </ion-card-title>
+       
+      </ion-card-header>
+  
+      <ion-card-content>
+        
+        <swiper-container>
+  
+          <swiper-slide *ngFor="let image of productImages">
+            <img [src]="image">
+          </swiper-slide>
+          
+        </swiper-container>
+  
+        <ion-item>
+          <ion-text>
+            <p> {{ productPrice }} </p>
+          </ion-text>
+         </ion-item>
+        <ion-item>
+          <ion-text>
+            <p> {{ productDescription }} </p>
+          </ion-text>
+        </ion-item>
+       
+  
+      </ion-card-content>
+  
+    </ion-card>
+  </ion-item>
+  
+</ion-content>

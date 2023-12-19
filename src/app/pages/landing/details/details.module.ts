@@ -4,21 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MainPageRoutingModule } from './main-routing.module';
+import { DetailsPageRoutingModule } from './details-routing.module';
 
-import { MainPage } from './main.page';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { DetailsPage } from './details.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SharedModule,
-    MainPageRoutingModule
+    DetailsPageRoutingModule
   ],
-  declarations: [MainPage]
-  ,
+  declarations: [DetailsPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MainPageModule {}
+export class DetailsPageModule {}

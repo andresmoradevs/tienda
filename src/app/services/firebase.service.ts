@@ -7,6 +7,9 @@ import { User } from '../models/user.model';
 import { UtilsService } from './utils.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { getStorage, uploadString, ref, getDownloadURL } from 'firebase/storage';
+import { AngularFireDatabase, PathReference, AngularFireObject } from '@angular/fire/compat/database';
+import { Product } from '../models/product.model';
+import { finalize } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +18,46 @@ export class FirebaseService {
 
   auth = inject(AngularFireAuth);
   firestore = inject(AngularFirestore);
+  database = inject(AngularFireDatabase);
   utilsService = inject(UtilsService);
   storage = inject(AngularFireStorage);
+
+  uploadProductImages(productID: string, images: FileList) {
+    const imageUrls = {};
+
+    for(let i = 0; i < images.length; i++) {
+      const file = images.item(i);
+      const filePath = `products/${productID}/${file.name}`;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file);
+
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            imageUrls[`image${i + 1}`] = url;
+            this.database.object(`products/${productID}/images`).update(imageUrls);
+          })
+        })
+      ).subscribe();
+
+    }
+
+  }
+
+  getDB() {
+    return this.database.list<any>('products').valueChanges();
+  }
+
+  addProduct(productID: any, product: any) {
+    // let idProduct = this.database.createPushId();
+    try {
+      this.uploadProductImages(productID, product.images);
+    } catch(er) {
+      console.log(er);
+    }
+    this.database.list('products').update(productID,product);
+
+  }
 
   getAuth() {
     return getAuth();
@@ -65,6 +106,12 @@ export class FirebaseService {
   }
 
   async uploadImage(path: string, data_url: string) {
+    return uploadString(ref(getStorage(), path), data_url, 'data_url').then(() => {
+      return getDownloadURL(ref(getStorage(), path))
+    })
+  }
+
+  async uploadImages(path: string, data_url: any) {
     return uploadString(ref(getStorage(), path), data_url, 'data_url').then(() => {
       return getDownloadURL(ref(getStorage(), path))
     })
