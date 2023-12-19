@@ -72,19 +72,6 @@ export class AddUpdateProductComponent  implements OnInit {
     
     this.firebaseService.addProduct(productToSave.id, productToSave);
 
-    const idKeyProduct = this.database.createPushId();
-    const productToSave: Product = {
-      id: idKeyProduct,
-      name: this.form.value.name,
-      price: this.form.value.price,
-      description: this.form.value.description,
-      images: this.form.controls.images.value
-      
-    }
-    this.firebaseService.addProduct(productToSave).child(idKeyProduct);
-
-    console.log(productToSave);
-
   }
 
 
