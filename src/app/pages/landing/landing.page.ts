@@ -25,6 +25,7 @@ export class LandingPage implements OnInit {
 
   ngOnInit() {
     this.getData();
+
   }
   
   getData() {
@@ -41,15 +42,10 @@ export class LandingPage implements OnInit {
     this.utilsService.saveInLocalStorage('productImages', product.images);
     
   }
+ 
 
   search(event) {
-    try {
       this.textSearch = event.detail.value;
-    } catch(er) {
-      console.log(er);
-
-    }
-    
   }
 
 }
