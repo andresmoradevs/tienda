@@ -4,11 +4,6 @@
 
         <ion-avatar>
 
-            <swiper-container>
-                <swiper-slide *ngFor="let img of productsImages">
-                    <img [src]="img">
-                </swiper-slide>
-            </swiper-container>
             
         </ion-avatar>
 
@@ -22,9 +17,10 @@
         
         <br>   
 
-        <ion-button (click)="selectFiles()" mode="ios" size="small" shape="round">
+        <!-- <ion-button (click)="pickImages()" mode="ios" size="small" shape="round">
             Abrir Camara/Subir Foto
-        </ion-button>
+        </ion-button> -->
+        <input type="file" (change)="onFileSelected($event)" multiple>
 
         <!-- Name -->
 
@@ -64,6 +60,17 @@
         <div class="validators" *ngIf="form.controls.description.errors && form.controls.description.touched">
             <div *ngIf="form.controls.description.errors?.['required']">Este campo es obligatorio</div>
             <div *ngIf="form.controls.description.errors?.['minLength']">Debe ingresar al menos 3 caracteres</div>
+        </div>
+
+        <app-custom-input 
+            [control]="form.controls.techs" 
+            type="text"
+            label="Detalles Adicionales">
+        </app-custom-input>
+
+        <div class="validators" *ngIf="form.controls.techs.errors && form.controls.techs.touched">
+            <div *ngIf="form.controls.techs.errors?.['required']">Este campo es obligatorio</div>
+            <div *ngIf="form.controls.techs.errors?.['minLength']">Debe ingresar al menos 3 caracteres</div>
         </div>
 
         <!-- Button Create Product -->

@@ -12,14 +12,12 @@
         <ion-label>
           <div class="name"> {{ product.name }} </div>
           <div class="data">
-            <strong>Precio: </strong>{{ product.price | currency: 'COP ' }} <br>
+            <strong>Precio: </strong>{{ product.price }} <br>
             <!-- <strong>Unidades Disponibles:</strong>{{ product.soldUnits }}  -->
           </div>
         </ion-label>
       </ion-item>
 
-
-      
       <ion-item-options>
         
         <ion-item-option (click)="addUpdateProduct(product)" side="start">
@@ -32,8 +30,6 @@
 
       </ion-item-options>
       
-     
-
     </ion-item-sliding>
   </ion-list>
 
