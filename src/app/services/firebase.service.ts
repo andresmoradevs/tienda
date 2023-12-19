@@ -18,7 +18,7 @@ export class FirebaseService {
 
   auth = inject(AngularFireAuth);
   firestore = inject(AngularFirestore);
-  database = inject(AngularFireDatabase)
+  database = inject(AngularFireDatabase);
   utilsService = inject(UtilsService);
   storage = inject(AngularFireStorage);
 
@@ -47,6 +47,7 @@ export class FirebaseService {
   getDB() {
     return this.database.list<any>('products').valueChanges();
   }
+
   addProduct(productID: any, product: any) {
     // let idProduct = this.database.createPushId();
     try {
@@ -55,6 +56,7 @@ export class FirebaseService {
       console.log(er);
     }
     this.database.list('products').update(productID,product);
+
   }
 
   getAuth() {

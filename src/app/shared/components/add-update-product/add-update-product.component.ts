@@ -1,7 +1,10 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { Camera,CameraResultType } from '@capacitor/camera';
 import { FilePicker } from '@capawesome/capacitor-file-picker';
+
 import { Product } from 'src/app/models/product.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -29,6 +32,7 @@ export class AddUpdateProductComponent  implements OnInit {
     })
   
   firebaseService = inject(FirebaseService);
+  database = inject(AngularFireDatabase);
   utilsService =  inject(UtilsService);
   productsImages: any;
   
@@ -43,8 +47,10 @@ export class AddUpdateProductComponent  implements OnInit {
     this.form.controls.images.setValue(this.productsImages);
   }
 
+
   ngOnInit() {
     this.user = this.utilsService.getFromLocalStorage('user');
+
   }
 
   submit() {
@@ -52,6 +58,7 @@ export class AddUpdateProductComponent  implements OnInit {
   }
   
   createProduct() {
+
     const product_id = this.firebaseService.database.createPushId();
     
     const productToSave: any = {
@@ -64,6 +71,18 @@ export class AddUpdateProductComponent  implements OnInit {
     }
     
     this.firebaseService.addProduct(productToSave.id, productToSave);
+
+    const idKeyProduct = this.database.createPushId();
+    const productToSave: Product = {
+      id: idKeyProduct,
+      name: this.form.value.name,
+      price: this.form.value.price,
+      description: this.form.value.description,
+      images: this.form.controls.images.value
+      
+    }
+    this.firebaseService.addProduct(productToSave).child(idKeyProduct);
+
     console.log(productToSave);
 
   }
