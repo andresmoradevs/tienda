@@ -1,12 +1,13 @@
 <ion-header no-border>
-  <ion-searchbar animated placeholder="Buscar" color="primary" (ionChange)="search($event)"></ion-searchbar>
+ 
+  <ion-searchbar placeholder="Buscar" color="primary" (ionChange)="search($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
     
     <ion-row>
-      <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let product of products | async | filter : textSearch">
+      <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="2" size-xxl="2" *ngFor="let product of products | async | filter : textSearch">
 
         <ion-card routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)">
 
@@ -19,26 +20,8 @@
             <ion-text>
               {{ product.price }}
             </ion-text>
-            <!-- <ion-card-title size="small" routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)" color="dark">
-              {{ product.name }}
-            </ion-card-title> -->
-  
-            <br>
-
-            <!-- Ver más información -->
-            <!-- <ion-text>
-              <details>
-                <summary>Ver más información</summary>
-                <div>
-                  Click sobre la imagen para ver los detalles de este producto
-                </div>
-              </details>  
-            </ion-text> -->
-             <!-- Fin Ver más información -->
           </ion-card-content>
           
-       
-        
       </ion-card>
       
       </ion-col>

@@ -45,3 +45,12 @@ ion-card {
     background-image: linear-gradient(to bottom, white 100%, #dfe9f3 0%);
 }
 
+@media (max-width: 575px) {
+    ion-grid {
+        ion-card {
+            padding: 0;
+            margin: 0;
+        }
+    }
+}
+
