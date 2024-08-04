@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Solicitud de Presupuesto</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label position="floating">Marca</ion-label>
+      <ion-input type="text" [(ngModel)]="appointmentData.brand" name="brand"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Modelo</ion-label>
+      <ion-input type="text" [(ngModel)]="appointmentData.model" name="model"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Pulgada</ion-label>
+      <ion-input type="text" [(ngModel)]="appointmentData.size" name="size"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Tipo de tecnología</ion-label>
+      <ion-select [(ngModel)]="appointmentData.technology" name="technology">
+        <ion-select-option value="Plasma">Plasma</ion-select-option>
+        <ion-select-option value="LCD">LCD</ion-select-option>
+        <ion-select-option value="LED">LED</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descripción de falla</ion-label>
+      <ion-textarea [(ngModel)]="appointmentData.issue" name="issue"></ion-textarea>
+    </ion-item>
+    <ion-button expand="full" type="submit">Guardar</ion-button>
+  </form>
+</ion-content>

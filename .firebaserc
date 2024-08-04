@@ -1,14 +1,5 @@
 {
-  "targets": {
-    "tiendita-co": {
-      "hosting": {
-        "app": [
-          "tiendita-co"
-        ]
-      }
-    }
-  },
   "projects": {
-    "default": "tiendita-co"
+    "default": "lacandelariatvpart"
   }
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
 import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -11,7 +12,8 @@ import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
+  
+  router = inject(Router);
   firebaseService = inject(FirebaseService);
   utilsService = inject(UtilsService);
   products: any[];
@@ -19,7 +21,10 @@ export class HomePage implements OnInit {
   ngOnInit() {
     
   }
-
+  logOut() {
+    this.firebaseService.signOut();
+    this.router.navigateByUrl('auth');
+  }
   // signOut() {
   //   this.firebaseService.signOut();
   // }

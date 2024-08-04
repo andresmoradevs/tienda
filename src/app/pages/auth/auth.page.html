@@ -1,6 +1,3 @@
-<app-header title="Inicia Sesión">
-
-</app-header>
 
 <ion-content>
 
@@ -41,6 +38,11 @@
     <ion-button expand="block" mode="ios" class="submit" type="submit" [disabled]="form.invalid">
       Ingresar
       <ion-icon slot="end" name="log-in-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button class="ion-margin-top" routerLink="/landing" expand="block" mode="ios" fill="outline">
+      Volver al inicio
+      <!-- <ion-icon slot="end" name="person-add-outline"></ion-icon> -->
     </ion-button>
 
     <ion-button class="ion-margin-top" routerLink="/sign-up" expand="block" mode="ios" fill="outline">

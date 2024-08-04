@@ -1,50 +1,51 @@
 <ion-header no-border>
-  <ion-searchbar animated placeholder="Buscar" color="primary" (ionChange)="search($event)"></ion-searchbar>
+  <ion-row>
+    <ion-col>
+      <img class="main_logo" src="assets/logo_white.png" alt="">
+    </ion-col>
+    <ion-col>
+      <ion-searchbar animated placeholder="Buscar" (ionChange)="search($event)"></ion-searchbar>
+    </ion-col>
+    <ion-col>
+      <div class="marquee">
+        <p class="callus-title">¿Necesitas una reparación? ¡Llámanos! +58 4128 675 991</p>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-toolbar>
+      <ion-buttons slot="secondary">
+        <ion-badge slot="start">{{ cartCount }}</ion-badge>
+        <ion-button routerLink="/cart">
+          <ion-icon size="large" name="cart-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="primary">
+        <ion-button></ion-button>
+      </ion-buttons>
+      <ion-button class="btn-toolbar" >Inicio</ion-button>
+      <ion-button class="btn-toolbar" href="#categorias">Categorias</ion-button>
+      <ion-button class="btn-toolbar" (click)="doItAppointment()">Agenda tu reparación</ion-button>
+    </ion-toolbar>
+  </ion-row>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    
+  <ion-grid id="inicio">
     <ion-row>
       <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let product of products | async | filter : textSearch">
-
-        <ion-card routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)">
-
+        <ion-card class="cardproduct" routerLink="details/{{product.id}}">
           <ion-card-header>
-            
-            <img [src]="product.images.image1">
+            <ion-icon class="btn-add" (click)="addToCart(product)" name="add-circle"></ion-icon>
           </ion-card-header>
-
           <ion-card-content>
-            <ion-text>
-              {{ product.price }}
-            </ion-text>
-            <!-- <ion-card-title size="small" routerLink="details/{{product.id}}" (click)="sendDetailsProduct(product)" color="dark">
-              {{ product.name }}
-            </ion-card-title> -->
-  
+            <img class="img-product" (click)="sendDetailsProduct(product)" [src]="product.images.image1">
             <br>
-
-            <!-- Ver más información -->
-            <!-- <ion-text>
-              <details>
-                <summary>Ver más información</summary>
-                <div>
-                  Click sobre la imagen para ver los detalles de este producto
-                </div>
-              </details>  
-            </ion-text> -->
-             <!-- Fin Ver más información -->
           </ion-card-content>
-          
-       
         
-      </ion-card>
-      
+        </ion-card>
       </ion-col>
     </ion-row>
-
   </ion-grid>
-  
-  
 </ion-content>
+

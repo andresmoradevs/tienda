@@ -3,12 +3,16 @@ import { Router } from '@angular/router';
 import { LoadingController, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
 import { AddUpdateProductComponent } from '../shared/components/add-update-product/add-update-product.component';
 import { Camera, CameraResultType,CameraSource } from '@capacitor/camera';
-
+import { BehaviorSubject } from 'rxjs';
+import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
+
+  private cart = new BehaviorSubject<Product[]>([]);
+  cart$ = this.cart.asObservable();
 
   loadingCtrl = inject(LoadingController);
   toastCtrl = inject(ToastController);
@@ -75,4 +79,28 @@ export class UtilsService {
     return this.modalController.dismiss(data);
   }
 
+  addToCart(product: Product) {
+    const currentCart = this.cart.value;
+    currentCart.push(product);
+    this.cart.next(currentCart);
+    localStorage.setItem('cart', JSON.stringify(currentCart));
+  }
+  getCartItems() {
+    return this.cart.value;
+  }
+
+  removeFromCart(product: Product) {
+    const currentCart = this.cart.value;
+    const index = currentCart.findIndex(p => p.id === product.id);
+    if (index > -1) {
+      currentCart.splice(index, 1);
+      this.cart.next(currentCart);
+      localStorage.setItem('cart', JSON.stringify(currentCart));
+    }
+  }
+
+  clearCart() {
+    this.cart.next([]);
+    localStorage.removeItem('cart');
+  }
 }

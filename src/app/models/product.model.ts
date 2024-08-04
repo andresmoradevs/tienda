@@ -3,6 +3,9 @@ export interface Product {
     name: string,
     description: string,
     price: string,
-    images: {},
+    images: {
+        image1: string;
+        [key: string]: string;
+    },
     techs: string
 }

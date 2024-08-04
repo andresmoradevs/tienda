@@ -1,0 +1,51 @@
+<ion-header no-border>
+  <ion-row>
+    <ion-col>
+      <img class="main_logo" src="assets/logo_white.png" alt="">
+    </ion-col>
+    <!-- <ion-col>
+      <ion-searchbar animated placeholder="Buscar" (ionChange)="search($event)"></ion-searchbar>
+    </ion-col> -->
+    <ion-col>
+      <div class="marquee">
+        <p class="callus-title">¿Necesitas una reparación? ¡Llámanos! +58 4128 675 991</p>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-toolbar>
+      <ion-buttons slot="secondary">
+        <ion-badge slot="start">{{ cartCount }}</ion-badge>
+        <ion-button routerLink="/cart">
+          <ion-icon size="large" name="cart-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="primary">
+        <ion-button></ion-button>
+      </ion-buttons>
+      <ion-button class="btn-toolbar" routerLink="/landing">Inicio</ion-button>
+      <ion-button class="btn-toolbar" href="#categorias">Categorias</ion-button>
+      <ion-button class="btn-toolbar" (click)="doItAppointment()">Agenda tu reparación</ion-button>
+    </ion-toolbar>
+  </ion-row>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of cart">
+      <ion-thumbnail slot="start" *ngIf="item.images && item.images.image1">
+        <img [src]="item.images.image1">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.description }}</p>
+        <p>Precio: {{ item.price }}</p>
+      </ion-label>
+      <ion-button color="danger" (click)="removeFromCart(item)">
+        <ion-icon name="trash-bin"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-button color="danger" (click)="clearCart()">Vaciar Carrito</ion-button>
+  <ion-button color="success" >Comprar</ion-button>
+</ion-content>

@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyAQfbw6nLWJfvV1HemoieH9YIG8RIRL2no",
-    authDomain: "tiendita-co.firebaseapp.com",
-    databaseURL: "https://tiendita-co-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "tiendita-co",
-    storageBucket: "tiendita-co.appspot.com",
-    messagingSenderId: "846699916518",
-    appId: "1:846699916518:web:167e8e3ea31af07a05df27",
-    measurementId: "G-2HLEQ3DZCJ"
+    apiKey: "AIzaSyBweV4wR3_WnpjKcrR43EPiJ_Zw2xbX6Hg",
+    authDomain: "lacandelariatvpart.firebaseapp.com",
+    databaseURL: "https://lacandelariatvpart-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "lacandelariatvpart",
+    storageBucket: "lacandelariatvpart.appspot.com",
+    messagingSenderId: "404906194020",
+    appId: "1:404906194020:web:3ad9d6c0e498e8e0941b71",
+    measurementId: "G-SJ0T9LQTQ9"
   }
 }
 
