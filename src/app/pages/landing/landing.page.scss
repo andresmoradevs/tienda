@@ -50,21 +50,32 @@ img {
     position: relative; /* Necesario para la posición absoluta del icono */
   }
   
-  .img-product {
-    width: 100%;
-  }
-  
-  .btn-add {
-    color: #FD9E10;
-    position: absolute;
-    top: -10px; /* Ajusta según sea necesario para tu diseño */
-    right: -10px; /* Ajusta según sea necesario para tu diseño */
-    font-size: 34px; /* Tamaño del icono, ajústalo según sea necesario */
-    background-color: white; /* Opcional: añade un fondo blanco para el icono */
-    border-radius: 50%; /* Opcional: hace el fondo redondo */
-    padding: 5px; /* Opcional: añade un poco de espacio alrededor del icono */
-    z-index: 10; /* Asegura que el icono esté por encima de otros elementos */
-  }
+.img-product {
+width: 100%;
+}
+
+.btn-add {
+color: #FD9E10;
+position: absolute;
+top: -10px; /* Ajusta según sea necesario para tu diseño */
+right: -10px; /* Ajusta según sea necesario para tu diseño */
+font-size: 34px; /* Tamaño del icono, ajústalo según sea necesario */
+background-color: white; /* Opcional: añade un fondo blanco para el icono */
+border-radius: 50%; /* Opcional: hace el fondo redondo */
+padding: 5px; /* Opcional: añade un poco de espacio alrededor del icono */
+z-index: 10; /* Asegura que el icono esté por encima de otros elementos */
+}
+.btn-detail {
+color: #FD9E10;
+position: absolute;
+top: -10px; /* Ajusta según sea necesario para tu diseño */
+left: -10px; /* Ajusta según sea necesario para tu diseño */
+font-size: 34px; /* Tamaño del icono, ajústalo según sea necesario */
+background-color: white; /* Opcional: añade un fondo blanco para el icono */
+border-radius: 50%; /* Opcional: hace el fondo redondo */
+padding: 5px; /* Opcional: añade un poco de espacio alrededor del icono */
+z-index: 10; /* Asegura que el icono esté por encima de otros elementos */
+}
 swiper-slide {
     img {
         max-width: 800px;

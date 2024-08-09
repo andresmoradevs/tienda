@@ -22,11 +22,15 @@ export class LandingPage implements OnInit {
   textSearch = '';
   router = inject(Router);
 
-  products: Observable<any[]>;
+  products: any[] = [];
+  paginatedProducts: any[] = [];
   product: any;
   id: any;
-
   cartCount: number = 0;
+
+  currentPage: number = 1;
+  itemsPerPage: number = 12;
+  totalItems: number = 0;
 
   slideOpts = {
     initialSlide: 1,
@@ -36,8 +40,6 @@ export class LandingPage implements OnInit {
       disableOnInteraction: false
     }
   };
-
-  
 
   ngOnInit() {
     this.getData();
@@ -55,7 +57,22 @@ export class LandingPage implements OnInit {
   }
 
   getData() {
-    return this.products = this.db.list('products').valueChanges();
+    this.db.list('products').valueChanges().subscribe((data: any[]) => {
+      this.products = data;
+      this.totalItems = data.length;
+      this.paginate();
+    });
+  }
+
+  paginate() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedProducts = this.products.slice(start, end);
+  }
+
+  changePage(page: number) {
+    this.currentPage = page;
+    this.paginate();
   }
 
   sendDetailsProduct(product: Product) {
@@ -64,10 +81,12 @@ export class LandingPage implements OnInit {
     this.utilsService.saveInLocalStorage('productDescription', product.description);
     this.utilsService.saveInLocalStorage('productPrice', product.price);
     this.utilsService.saveInLocalStorage('productImages', product.images);
+    this.utilsService.saveInLocalStorage('productTechs', product.techs);
   }
 
   search(event) {
     this.textSearch = event.detail.value;
+    this.paginate();
   }
 
   async doItAppointment() {

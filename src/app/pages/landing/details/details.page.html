@@ -1,59 +1,90 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header no-border>
+  <ion-row>
+    <ion-col>
+      <img class="main_logo" src="assets/logo_white.png" alt="">
+    </ion-col>
     
-    <ion-buttons slot="start">
-      
-      <ion-button (click)="goBack()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </ion-button>
-      
-    </ion-buttons>
-    <ion-buttons slot="end">
-
-      <ion-button>
-        <ion-icon name="apps"></ion-icon>
-      </ion-button>
-
-    </ion-buttons> 
-    
-  </ion-toolbar>
+    <ion-col>
+      <div class="marquee">
+        <p class="callus-title">¿Necesitas una reparación? ¡Llámanos! +58 4128 675 991</p>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-toolbar>
+      <ion-buttons slot="secondary">
+       
+        
+        <ion-badge>{{ cartCount }}</ion-badge> 
+        <ion-button routerLink="/cart">
+          <ion-icon size="large" name="cart-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-button routerLink="/landing">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-button class="btn-toolbar" routerLink="/landing">Inicio</ion-button>
+      <ion-button class="btn-toolbar" href="#categorias">Categorias</ion-button>
+      <ion-button class="btn-toolbar" (click)="doItAppointment()">Agenda tu reparación</ion-button>
+    </ion-toolbar>
+  </ion-row>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-card> 
+  <ion-row slot="fixed">
+    <ion-col>
+      <ion-item>
+        <ion-card> 
+    
+          <ion-card-header>
+      
+            <ion-card-title> {{ productName }} </ion-card-title>
+           
+          </ion-card-header>
+      
+          <ion-card-content>
+            
+            <swiper-container>
+      
+              <swiper-slide *ngFor="let image of productImages">
+                <img class="img-product" [src]="image">
+              </swiper-slide>
+              
+            </swiper-container>
+            <ion-item lines="none" class="item-card">
+              <ion-text>
+                <p>{{ productName }} </p>
+              </ion-text>
+            </ion-item>
+            <ion-item lines="none" class="item-card">
+              <ion-text>
+                <p>Referencia: {{ productDescription }} </p>
+              </ion-text>
+            </ion-item>
+    
+            <ion-item lines="none" class="item-card">
+              <ion-text>
+                <p>Precio: {{ productPrice }} </p>
+              </ion-text>
+             </ion-item>
+             <ion-item lines="none" class="item-card">
+              <ion-text>
+                <p>{{ productPrice }} </p>
+              </ion-text>
+            </ion-item>
+            
+           
+      
+          </ion-card-content>
+      
+        </ion-card>
+      </ion-item>
+    </ion-col>
+    
+  </ion-row>
+  
 
-      <ion-card-header>
-  
-        <ion-card-title> {{ productName }} </ion-card-title>
-       
-      </ion-card-header>
-  
-      <ion-card-content>
-        
-        <swiper-container>
-  
-          <swiper-slide *ngFor="let image of productImages">
-            <img [src]="image">
-          </swiper-slide>
-          
-        </swiper-container>
-  
-        <ion-item>
-          <ion-text>
-            <p> {{ productPrice }} </p>
-          </ion-text>
-         </ion-item>
-        <ion-item>
-          <ion-text>
-            <p> {{ productDescription }} </p>
-          </ion-text>
-        </ion-item>
-       
-  
-      </ion-card-content>
-  
-    </ion-card>
-  </ion-item>
   
 </ion-content>

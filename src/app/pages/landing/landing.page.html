@@ -33,7 +33,7 @@
 <ion-content>
   <ion-grid id="inicio">
     <ion-row>
-      <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let product of products | async | filter : textSearch">
+      <ion-col size="12" size-sm="6" size-md="4" size-lg="3" size-xl="2" *ngFor="let product of paginatedProducts | filter : textSearch">
         <ion-card class="cardproduct" routerLink="details/{{product.id}}">
           <ion-card-header>
             <ion-icon class="btn-add" (click)="addToCart(product)" name="add-circle"></ion-icon>
@@ -41,11 +41,22 @@
           <ion-card-content>
             <img class="img-product" (click)="sendDetailsProduct(product)" [src]="product.images.image1">
             <br>
+            <ion-card-title>{{ product.price }}</ion-card-title>
           </ion-card-content>
-        
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+  
+  <!-- Paginación -->
+  <ion-row class="pagination-controls">
+    <ion-button *ngIf="currentPage > 1" (click)="changePage(currentPage - 1)">
+      Anterior
+    </ion-button>
+    <ion-button *ngIf="currentPage * itemsPerPage < totalItems" (click)="changePage(currentPage + 1)">
+      Siguiente
+    </ion-button>
+  </ion-row>
 </ion-content>
+
 
